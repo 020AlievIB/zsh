@@ -55,9 +55,14 @@ defaults write com.googlecode.iterm2 "Normal Font" "HackNerdFont-Regular 12"
 defaults write com.googlecode.iterm2 "Non Ascii Font" "HackNerdFont-Regular 12"
 defaults write com.googlecode.iterm2 "Default Bookmark Guid" "Dark Background"
 
-# Update .zshrc
-echo "⚙️ Configuring zsh..."
-echo 'ZSH_THEME="powerlevel10k/powerlevel10k"' >> ~/.zshrc
+# Copy .zshrc
+echo "⚙️ Setting up .zshrc..."
+# Create backup of existing .zshrc if it exists
+if [ -f ~/.zshrc ]; then
+    echo "📑 Creating backup of existing .zshrc..."
+    cp ~/.zshrc ~/.zshrc.backup
+fi
+cp .zshrc ~/.zshrc
 
 echo "
 ✅ Installation complete! Please do the following manual steps:
