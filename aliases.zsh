@@ -1,9 +1,15 @@
 CURRENT_FILE="~/.custom_zsh_settings/aliases.zsh"
+WORKSPACE_FILE="~/.custom_zsh_settings/workspace-aliases.zsh"
 GIT_PLUGIN_FILE="~/.oh-my-zsh/custom/plugins/git/git.plugin.zsh"
+CUR_STORAGE_FILE="~/Library/Application\ Support/Cursor/User/globalStorage/storage.json"
+TMUX_FILE="~/.tmux.conf"
+
+alias python="python3"
 
 # ZSH
-alias rzsh="source ~/.zshrc"
 alias web="webstorm"
+alias rzsh="source ~/.zshrc"
+alias rtmux="source $TMUX_FILE"
 alias zsh-vim="vim ~/.zshrc"
 alias zsh-vsc="code ~/.zshrc"
 alias zsh-cur="cursor ~/.zshrc"
@@ -16,18 +22,38 @@ alias gali-cur="cur $GIT_PLUGIN_FILE"
 alias gali-vim="vim $GIT_PLUGIN_FILE"
 alias gali-vsc="code $GIT_PLUGIN_FILE"
 
+alias ws-cur="cur $WORKSPACE_FILE"
+alias ws-vim="vim $WORKSPACE_FILE"
+alias ws-vsc="code $WORKSPACE_FILE"
+
+alias aistor-cur="cur $CUR_STORAGE_FILE"
+alias aistor-vim="vim $CUR_STORAGE_FILE"
+alias aistor-code="code $CUR_STORAGE_FILE"
+
+alias tmux-cur="cur $TMUX_FILE"
+alias tmux-vim="vim $TMUX_FILE"
+alias tmux-code="code $TMUX_FILE"
+
+ION_BUILD="echo 'Building project 🛠️' && ionic build"
+ION_SYNC="echo 'Syncing project 🚀' && ionic cap sync"
+ION_OPEN="echo 'Opening project 🚀' && ionic cap open"
+ION_RUN="echo 'Running project 🚀' && ionic cap run"
+
 # Ionic 
-alias ion-so-ios="ionic cap sync ios && ionic cap open ios"
-alias ion-so-and="ionic cap sync android && ionic cap open android"
+alias ion-so-ios="$ION_BUILD && $ION_SYNC && $ION_OPEN ios"
+alias ion-so-and="$ION_BUILD && $ION_SYNC && $ION_OPEN android"
 
-alias ion-sr-ios="ionic cap sync ios && ionic cap run ios -l --external"
-alias ion-sr-and="ionic cap sync android && ionic cap run android -l --external"
+alias ion-sr-ios="$ION_SYNC && $ION_RUN ios -l --external"
+alias ion-sr-and="$ION_SYNC && $ION_RUN android -l --external"
 
-alias ion-bso-ios="ionic build && ionic cap sync ios && ionic cap open ios"
-alias ion-bso-and="ionic build && ionic cap sync android && ionic cap open android"
+alias ion-r-ios="$ION_RUN ios -l --external"
+alias ion-r-and="$ION_RUN android -l --external"
 
-alias ion-bsr-ios="ionic build && ionic cap sync ios && ionic cap run ios -l --external"
-alias ion-bsr-and="ionic build && ionic cap sync android && ionic cap run android -l --external"
+alias ion-bso-ios="$ION_BUILD && $ION_SYNC && $ION_OPEN ios"
+alias ion-bso-and="$ION_BUILD && $ION_SYNC && $ION_OPEN android"
+
+alias ion-bsr-ios="$ION_BUILD && $ION_SYNC && $ION_RUN ios -l --external"
+alias ion-bsr-and="$ION_BUILD && $ION_SYNC && $ION_RUN android -l --external"
 
 # Docker compose 
 alias dc="docker-compose"
@@ -35,8 +61,8 @@ alias dcdd="docker-compose down"
 alias dcud="docker-compose up -d"
 
 # Supabase
-alias supfnn="supabase functions new"
-alias supfnd="supabase functions deploy"
+alias supfnn="supabase start && supabase functions new"
+alias supfnd="supabase start && supabase functions deploy"
 
 # Run
 alias nrd="npm run dev"
@@ -72,45 +98,4 @@ alias my-alias="grep '^alias' $CURRENT_FILE"
 alias ip="curl ifconfig.me" # внешний IP адрес
 alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
 alias get-bat="system_profiler SPPowerDataType | grep -A3 -B7 \"Health Information\""
-
-# Open projects via VS Code
-alias ossh="code ~/.ssh"
-alias oulbi="open ~/Desktop/ulbi.code-workspace"
-alias obibo="open ~/Desktop/bibo.code-workspace"
-alias ogo="open ~/Desktop/go_test.code-workspace"
-alias oday="open ~/Desktop/daymohk.code-workspace"
-alias ovor="open ~/Desktop/voronka.code-workspace"
-alias orc="open ~/Desktop/run-code.code-workspace"
-alias ober="open ~/Desktop/berivery.code-workspace"
-alias opio="open ~/Desktop/parhatio.code-workspace"
-alias opeh="open ~/Desktop/epihelper.code-workspace"
-alias opehg="open ~/Desktop/gepihelper.code-workspace"
-alias opiog="open ~/Desktop/parhatio_2.code-workspace"
-alias opf="open ~/Desktop/parhato_food.code-workspace"
-alias oirsp="open ~/Desktop/irs-portal.code-workspace"
-alias opioa="open ~/Desktop/parhato_app.code-workspace"
-alias oirsap="open ~/Desktop/admin-portal.code-workspace"
-alias opiod="open ~/Desktop/parhato-driver.code-workspace"
-alias ossp="open ~/Desktop/softsmile-portal.code-workspace"
-alias opiof="open ~/Desktop/parhato_food_web.code-workspace"
-
-# Open projects via Cursor
-alias ossh-cur="cur ~/.ssh"
-alias obibo-cur="cur ~/Desktop/bibo.code-workspace"
-alias oulbi-cur="cur ~/Desktop/ulbi.code-workspace"
-alias ogo-cur="cur ~/Desktop/go_test.code-workspace"
-alias ovor-cur="cur ~/Desktop/voronka.code-workspace"
-alias oday-cur="cur ~/Desktop/daymohk.code-workspace"
-alias orc-cur="cur ~/Desktop/run-code.code-workspace"
-alias ober-cur="cur ~/Desktop/berivery.code-workspace"
-alias opio-cur="cur ~/Desktop/parhatio.code-workspace"
-alias opeh-cur="cur ~/Desktop/epihelper.code-workspace"
-alias opehg-cur="cur ~/Desktop/gepihelper.code-workspace"
-alias opiog-cur="cur ~/Desktop/parhatio_2.code-workspace"
-alias oirsp-cur="cur ~/Desktop/irs-portal.code-workspace"
-alias opf-cur="cur ~/Desktop/parhato_food.code-workspace"
-alias opioa-cur="cur ~/Desktop/parhato_app.code-workspace"
-alias oirsap-cur="cur ~/Desktop/admin-portal.code-workspace"
-alias opiod-cur="cur ~/Desktop/parhato-driver.code-workspace"
-alias ossp-cur="cur ~/Desktop/softsmile-portal.code-workspace"
-alias opiof-cur="cur ~/Desktop/parhato_food_web.code-workspace"
+alias vstud="open -a /Applications/Visual\ Studio\.app"
