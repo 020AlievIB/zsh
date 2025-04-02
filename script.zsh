@@ -44,15 +44,21 @@ echo "✨ Installing powerlevel10k theme..."
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # Install Nerd Font
-echo "📝 Installing Nerd Font..."
-brew tap homebrew/cask-fonts
-brew install --cask font-hack-nerd-font
+echo "📝 Installing MesloLGS NF fonts..."
+# Create fonts directory if it doesn't exist
+mkdir -p ~/Library/Fonts
+
+# Copy MesloLGS NF fonts to the fonts directory
+cp "MesloLGS_NF/MesloLGS NF Regular.ttf" ~/Library/Fonts/
+cp "MesloLGS_NF/MesloLGS NF Italic.ttf" ~/Library/Fonts/
+cp "MesloLGS_NF/MesloLGS NF Bold.ttf" ~/Library/Fonts/
+cp "MesloLGS_NF/MesloLGS NF Bold Italic.ttf" ~/Library/Fonts/
 
 # Configure iTerm2 theme
 echo "🎨 Configuring iTerm2..."
 # Create a minimal preferences file for iTerm2
-defaults write com.googlecode.iterm2 "Normal Font" "HackNerdFont-Regular 12"
-defaults write com.googlecode.iterm2 "Non Ascii Font" "HackNerdFont-Regular 12"
+defaults write com.googlecode.iterm2 "Normal Font" "MesloLGS NF Regular 12"
+defaults write com.googlecode.iterm2 "Non Ascii Font" "MesloLGS NF Regular 12"
 defaults write com.googlecode.iterm2 "Default Bookmark Guid" "Dark Background"
 
 # Copy .zshrc
