@@ -2,6 +2,18 @@
 autoload -Uz is-at-least
 git_version="${${(As: :)$(git version 2>/dev/null)}[3]}"
 
+# Get the name of the current branch
+function git_current_branch() {
+  local ref
+  ref=$(command git symbolic-ref --quiet HEAD 2> /dev/null)
+  local ret=$?
+  if [[ $ret != 0 ]]; then
+    [[ $ret == 128 ]] && return  # no git repo.
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+  fi
+  echo ${ref#refs/heads/}
+}
+
 #
 # Functions
 #
@@ -35,6 +47,9 @@ function gunwipall() {
     git reset $_commit || return 1
   fi
 }
+
+
+
 
 # Check if main exists and use instead of master
 function git_main_branch() {
@@ -258,6 +273,7 @@ alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
 alias grbd='git rebase $(git_develop_branch)'
 alias grbod='git rebase origin/$(git_develop_branch)'
+alias grbodf='git fetch && git rebase origin/$(git_develop_branch)'
 alias gcod='git checkout $(git_develop_branch)'
 alias grbi='git rebase --interactive'
 alias grbm='git rebase $(git_main_branch)'
@@ -267,7 +283,7 @@ alias grbs='git rebase --skip'
 alias grev='git revert'
 alias grh='git reset'
 alias grhh='git reset --hard'
-alias groh='git reset origin/$(git_current_branch) --hard'
+alias groh='git reset origin/$(current_branch) --hard'
 alias grm='git rm'
 alias grmc='git rm --cached'
 alias grmv='git remote rename'
@@ -315,6 +331,7 @@ alias gtl='gtl(){ git tag --sort=-v:refname -n --list "${1}*" }; noglob gtl'
 
 alias gunignore='git update-index --no-assume-unchanged'
 alias gunwip='git rev-list --max-count=1 --format="%s" HEAD | grep -q "\--wip--" && git reset HEAD~1'
+alias groh='git reset origin/$(git_current_branch) --hard'
 
 alias gup='git pull --rebase'
 alias gupv='git pull --rebase --verbose'
@@ -325,7 +342,7 @@ alias gupomi='git pull --rebase=interactive origin $(git_main_branch)'
 
 alias glum='git pull upstream $(git_main_branch)'
 alias gluc='git pull upstream $(git_current_branch)'
-
+alias gci='git checkout $(git branch -a | fzf | xargs | sed "s#remotes/origin/##")'
 
 function grename() {
   if [[ -z "$1" || -z "$2" ]]; then
